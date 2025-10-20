@@ -1,0 +1,32 @@
+import uvicorn
+from fastapi import FastAPI
+from fastapi_pagination import add_pagination
+from fastapi_problem.handler import new_exception_handler, add_exception_handler
+
+from app.config import settings
+from app.routers.v1.private import private_router
+
+docs_url = "/docs" if settings.enable_docs else None
+redoc_url = "/redoc"  if settings.enable_docs else None
+openapi_url = "/openapi.json" if settings.enable_docs else None
+
+def create_app()-> FastAPI:
+
+    app = FastAPI(root_path=settings.ROOT_PATH,
+                  title="Favorite Service",
+                  description="Saves all user picked lots",
+                  version="0.0.1",
+                  docs_url=docs_url,
+                  redoc_url=redoc_url,
+                  openapi_url=openapi_url,
+                  )
+
+    eh = new_exception_handler()
+    add_exception_handler(app, eh)
+    add_pagination(app)
+    app.include_router(private_router)
+    return app
+app: FastAPI = create_app()
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
