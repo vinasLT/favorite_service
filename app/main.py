@@ -10,7 +10,7 @@ docs_url = "/docs" if settings.enable_docs else None
 redoc_url = "/redoc"  if settings.enable_docs else None
 openapi_url = "/openapi.json" if settings.enable_docs else None
 
-def create_app()-> FastAPI:
+def create_app() -> FastAPI:
 
     app = FastAPI(root_path=settings.ROOT_PATH,
                   title="Favorite Service",
@@ -25,8 +25,14 @@ def create_app()-> FastAPI:
     add_exception_handler(app, eh)
     add_pagination(app)
     app.include_router(private_router)
+
+    @app.get("/health", tags=["Health"])
+    async def health_check():
+        return {"status": "ok"}
+
     return app
 app: FastAPI = create_app()
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
