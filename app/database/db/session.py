@@ -2,8 +2,8 @@ from typing import Any, AsyncGenerator
 
 from sqlalchemy import Engine, create_engine
 from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine, AsyncSession, async_sessionmaker
-from config import settings
-from core.utils import BASE_DIR
+from app.config import settings
+from app.core.utils import BASE_DIR
 
 if settings.DEBUG:
     SQLALCHEMY_ASYNC_DATABASE_URL = f"sqlite+aiosqlite:///{BASE_DIR}/db.sqlite"
