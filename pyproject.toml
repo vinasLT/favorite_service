@@ -19,6 +19,7 @@ dependencies = [
     "loguru (>=0.7.3,<0.8.0)",
     "authtools @ git+https://github.com/vinasLT/shared_auth.git@v0.1.5",
     "factory-boy (>=3.3.3,<4.0.0)",
+    "pytest-asyncio (>=1.2.0,<2.0.0)",
 ]
 
 
