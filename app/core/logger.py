@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from functools import wraps
 from typing import Optional, Dict, Any
 
-from config import settings, Environment
+from app.config import settings, Environment
 
 
 class ConsoleLogger:
