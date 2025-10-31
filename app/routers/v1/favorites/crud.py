@@ -3,20 +3,22 @@ from AuthTools import HeaderUser
 from fastapi import APIRouter, Depends, Body
 from rfc9457 import BadRequestProblem, ServerProblem
 from sqlalchemy.ext.asyncio import AsyncSession
-from AuthTools.Permissions.dependencies import require_permissions, require_one_of_permissions
-from fastapi_pagination.ext.sqlalchemy import paginate
+from AuthTools.Permissions.dependencies import require_one_of_permissions
+from fastapi_pagination.ext.sqlalchemy import apaginate
 from app.config import Permissions
 from app.core.logger import logger
-from app.core.utils import create_pagination_page
 from app.database.crud.favorite import FavoriteService
 from app.database.db.session import get_async_db
 from app.database.schemas.favorite import FavoriteRead, FavoriteCreate
+from app.routers.v1.favorites.admin import admin_favorite_router
 from app.rpc_client.auction_api import ApiRpcClient
 from app.schemas.favorite import FavoriteIn
+from app.schemas.pagination import FavoritesPage
 
 favorites_router = APIRouter(prefix='/favorites')
 
-FavoritesPage = create_pagination_page(FavoriteRead)
+favorites_router.include_router(admin_favorite_router, tags=['admin'])
+
 
 @favorites_router.get('/', response_model=FavoritesPage,
                       description=f'Get all favorites, required permissions: {Permissions.FAVORITES_READ.value}')
@@ -27,7 +29,7 @@ async def get_all_favorites_for_user(
     user_uuid = user.uuid
     favorite_service = FavoriteService(db)
     stmt = await favorite_service.get_all_by_user_uuid(user_uuid, True)
-    return await paginate(db, stmt)
+    return await apaginate(db, stmt)
 
 @favorites_router.get('/for-lot', response_model=FavoriteRead, description='Get favorite for lot, required permissions:'
                                                                            f'{Permissions.FAVORITES_READ.value}')
@@ -97,7 +99,7 @@ async def add_lot_to_favorites(
 async def remove_lot_from_favorites(
         favorite_id: int,
         db: AsyncSession = Depends(get_async_db),
-        user: HeaderUser = Depends(require_permissions(Permissions.FAVORITES_DELETE))
+        user: HeaderUser = Depends(require_one_of_permissions(Permissions.FAVORITES_DELETE, Permissions.FAVORITES_OWN_FULL))
 ):
     favorite_service = FavoriteService(db)
     favorite = await favorite_service.get_by_user_uuid_and_id(user.uuid, favorite_id)
