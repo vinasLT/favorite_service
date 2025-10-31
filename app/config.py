@@ -37,9 +37,6 @@ class Settings(BaseSettings):
     DB_USER: str = "postgres"
     DB_PASS: str = "testpass"
 
-    #Redis
-    REDIS_URL: str = "redis://localhost:6379"
-
     #rpc
     RPC_API_URL: str = "localhost:50051"
 
