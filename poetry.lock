@@ -136,7 +136,7 @@ test = ["distro (>=1.9.0,<1.10.0)", "flake8 (>=6.1,<7.0)", "flake8-pyi (>=24.1.0
 
 [[package]]
 name = "authtools"
-version = "0.1.5"
+version = "0.1.8"
 description = "Shared auth library for FastAPI"
 optional = false
 python-versions = ">=3.9"
@@ -152,8 +152,8 @@ pydantic = ">=2.11.9,<3.0.0"
 [package.source]
 type = "git"
 url = "https://github.com/vinasLT/shared_auth.git"
-reference = "v0.1.5"
-resolved_reference = "15c328317f6839dfb03e2ab039fc77781c980380"
+reference = "v0.1.8"
+resolved_reference = "c46ad3a9a7979d4f45f42fbe64bb9d4b0d5c4f1c"
 
 [[package]]
 name = "certifi"
@@ -288,14 +288,14 @@ tortoise = ["tortoise-orm (>=0.22.0)"]
 
 [[package]]
 name = "fastapi-problem"
-version = "0.11.5"
+version = "0.11.6"
 description = "FastAPI support for RFC9457 problems."
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "fastapi_problem-0.11.5-py3-none-any.whl", hash = "sha256:37e7e77eacb5d358cb970b959b30fb3e209c84bcf8a08ca9343aa28700fcea8d"},
-    {file = "fastapi_problem-0.11.5.tar.gz", hash = "sha256:22206fa9faf7501637218cee15ae8abd3e0ad728b39c72b7a0642921d27ade93"},
+    {file = "fastapi_problem-0.11.6-py3-none-any.whl", hash = "sha256:e66ea29e7b4108bf3e49ff8ca0c474c8f5574a71cc9ef1614e6ff346b439988c"},
+    {file = "fastapi_problem-0.11.6.tar.gz", hash = "sha256:ddf0eda182333be48694e59e91fe6e9d3aacd3f80257e99d3a43c6a67163ce6c"},
 ]
 
 [package.dependencies]
@@ -1385,4 +1385,4 @@ dev = ["black (>=19.3b0) ; python_version >= \"3.6\"", "pytest (>=4.6.2)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13,<4.0"
-content-hash = "2104bd15e7de7d9fc57f4a1306eacd1b62a514f0f8b7e4e27c738bbcb0de146e"
+content-hash = "c611425e6c41b20cbd3889f9563e42b2df53e2d2617dcf9353d1a93cfe6ce81f"
