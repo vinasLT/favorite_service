@@ -1,6 +1,6 @@
-from datetime import datetime
-from typing import Optional
-from pydantic import BaseModel, ConfigDict, field_validator
+from datetime import datetime, UTC, timezone
+from typing import Optional, Literal
+from pydantic import BaseModel, ConfigDict, field_validator, computed_field
 
 from app.schemas.favorite import Auctions
 
@@ -16,7 +16,16 @@ class FavoriteBase(BaseModel):
     images: str | None = None
     odometer: int | None = None
     location: str | None = None
-    damage: str | None = None
+    damage_pr: str | None = None
+    damage_sec: str | None = None
+    fuel: str | None = None
+    transmission: str | None = None
+    engine_size: str | None = None
+    cylinders: str | None = None
+
+    seller: str | None = None
+    documents: str | None = None
+    status: str | None = None
 
 
 class FavoriteCreate(FavoriteBase):
@@ -24,22 +33,14 @@ class FavoriteCreate(FavoriteBase):
 
 
 
-class FavoriteUpdate(BaseModel):
-    lot_id: Optional[int] = None
-    auction: Optional[bool] = None
-    user_uuid: Optional[str] = None
-    title: Optional[str] = None
-    auction_date: Optional[datetime] = None
-    vin: Optional[str] = None
-    images: Optional[str] = None
-    odometer: Optional[int] = None
-    location: Optional[str] = None
-    damage: Optional[str] = None
+class FavoriteUpdate(FavoriteBase):
+    lot_id: int | None = None
+    auction: Auctions | None = None
+    user_uuid: str | None = None
 
 
 class FavoriteRead(FavoriteBase):
     id: int
-
     images: list[str]
 
     @field_validator("images", mode="before")
@@ -48,5 +49,13 @@ class FavoriteRead(FavoriteBase):
         if v:
             return v.split(",")
         return None
+
+    @computed_field
+    @property
+    def form_get_type(self) -> Literal["active", "history"]:
+        now = datetime.now(timezone.utc)
+        if self.auction_date and self.auction_date < now:
+            return "history"
+        return "active"
 
     model_config = ConfigDict(from_attributes=True)

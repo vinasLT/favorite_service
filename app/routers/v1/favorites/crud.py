@@ -87,7 +87,17 @@ async def add_lot_to_favorites(
           images=','.join(lot.link_img_hd),
           odometer=lot.odometer,
           location=lot.location,
-          damage=lot.damage_pr)
+          damage_pr=lot.damage_pr,
+          damage_sec=lot.damage_sec,
+          fuel=lot.fuel,
+          transmission=lot.transmission,
+          engine_size=lot.engine_size,
+          cylinders=lot.cylinders,
+          seller=lot.seller,
+          documents=lot.documents,
+          status=lot.status
+
+      )
       )
       return favorite
     else:

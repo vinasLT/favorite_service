@@ -22,7 +22,17 @@ class Favorite(Base):
     images: Mapped[str] = mapped_column(nullable=True)
     odometer: Mapped[int] = mapped_column(nullable=True)
     location: Mapped[str] = mapped_column(nullable=True)
-    damage: Mapped[str] = mapped_column(nullable=True)
+    damage_pr: Mapped[str] = mapped_column(nullable=True)
+    damage_sec: Mapped[str] = mapped_column(nullable=True)
+
+    fuel: Mapped[str] = mapped_column(nullable=True)
+    transmission: Mapped[str] = mapped_column(nullable=True)
+    engine_size: Mapped[str] = mapped_column(nullable=True)
+    cylinders: Mapped[str] = mapped_column(nullable=True)
+
+    seller: Mapped[str] = mapped_column(nullable=True)
+    document: Mapped[str] = mapped_column(nullable=True)
+    status: Mapped[str] = mapped_column(nullable=True)
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
