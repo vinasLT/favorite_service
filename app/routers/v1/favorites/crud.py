@@ -95,7 +95,7 @@ async def add_lot_to_favorites(
 
 
 @favorites_router.delete('/{favorite_id}', response_model=FavoriteRead,
-                         description=f'Remove lot from favorites, required permissions: {Permissions.FAVORITES_WRITE}')
+                         description=f'Remove lot from favorites, required permissions: {Permissions.FAVORITES_WRITE.value}')
 async def remove_lot_from_favorites(
         favorite_id: int,
         db: AsyncSession = Depends(get_async_db),
