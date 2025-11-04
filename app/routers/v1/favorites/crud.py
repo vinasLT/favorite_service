@@ -94,7 +94,7 @@ async def add_lot_to_favorites(
           engine_size=lot.engine_size,
           cylinders=lot.cylinders,
           seller=lot.seller,
-          documents=lot.documents,
+          document=lot.document,
           status=lot.status
 
       )

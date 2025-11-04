@@ -24,7 +24,7 @@ class FavoriteBase(BaseModel):
     cylinders: str | None = None
 
     seller: str | None = None
-    documents: str | None = None
+    document: str | None = None
     status: str | None = None
 
 
