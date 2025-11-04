@@ -91,8 +91,8 @@ async def add_lot_to_favorites(
           damage_sec=lot.damage_sec,
           fuel=lot.fuel,
           transmission=lot.transmission,
-          engine_size=lot.engine_size,
-          cylinders=lot.cylinders,
+          engine_size=str(lot.engine_size),
+          cylinders=str(lot.cylinders),
           seller=lot.seller,
           document=lot.document,
           status=lot.status

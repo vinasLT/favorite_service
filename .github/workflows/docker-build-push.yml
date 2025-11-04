@@ -146,6 +146,5 @@ jobs:
           script: |
             set -x
             docker pull ${{ env.IMAGE_NAME }}:main
-            cd /srv/vinas/deploy_conf
-            docker compose up -d --build
+            
             echo "Deployment complete"
