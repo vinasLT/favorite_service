@@ -82,7 +82,7 @@ async def add_lot_to_favorites(
           user_uuid=user.uuid,
           auction=data.auction,
           title=lot.title,
-          auction_date=lot.auction_date,
+          auction_date=lot.auction_date if lot.auction_date else lot.sale_date,
           vin=lot.vin,
           images=','.join(lot.link_img_hd),
           odometer=lot.odometer,
